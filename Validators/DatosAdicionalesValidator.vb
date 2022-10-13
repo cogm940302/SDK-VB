@@ -13,9 +13,9 @@ Namespace vb.Validators
         Inherits AbstractValidator(Of DatosAdicionalesData.DataItem)
 
         Public Sub New()
-            RuleFor(Function(dataItem) dataItem.id).GreaterThan(0)
-            RuleFor(Function(dataItem) dataItem.label).MinimumLength(1).MaximumLength(60)
-            RuleFor(Function(dataItem) dataItem.value).MinimumLength(1).MaximumLength(30)
+            RuleFor(Function(dataItem) dataItem.id).GreaterThan(-1)
+            RuleFor(Function(dataItem) dataItem.label).NotNull().MinimumLength(1).MaximumLength(60)
+            RuleFor(Function(dataItem) dataItem.value).NotNull().MinimumLength(1).MaximumLength(100)
         End Sub
     End Class
 End Namespace

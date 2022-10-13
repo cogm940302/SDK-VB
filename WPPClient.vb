@@ -9,6 +9,7 @@ Imports SdkVisualBasic.vb.AES
 Imports SdkVisualBasic.vb.ExceptionHandler
 Imports SdkVisualBasic.vb.Http
 Imports SdkVisualBasic.vb.Models
+Imports SdkVisualBasic.vb.Models.DatosAdicionalesData
 Imports SdkVisualBasic.vb.Validators
 
 Namespace SdkVisualBasic
@@ -63,6 +64,14 @@ Namespace SdkVisualBasic
                 Dim d3dsValidator As D3DSValidator = New D3DSValidator()
                 d3dsValidator.ValidateAndThrow(payment.data3ds)
             End If
+
+            If payment.additionalData IsNot Nothing AndAlso payment.additionalData.data IsNot Nothing Then
+                For Each dataItem As DataItem In payment.additionalData.data
+                    Dim datosValidator As DatosAdicionalesValidator = New DatosAdicionalesValidator()
+                    datosValidator.ValidateAndThrow(dataItem)
+                Next
+            End If
+
 
             Dim urlDataValidator As UrlValidator = New UrlValidator()
             urlDataValidator.ValidateAndThrow(payment.url)
